@@ -33,9 +33,9 @@ export default function CandidateUpdate() {
   const validationSchema = Yup.object({
     firstName: Yup.string(),
     lastName: Yup.string(),
-    identityNumber: Yup.string().length(11 ,"Not 11 Characters in Length"),
+    identityNumber: Yup.string().length(11 ,"11 Karakter İçermelidir"),
     dateOfBirth: Yup.date(),
-    email: Yup.string().email("Not a Valid Email"),
+    email: Yup.string().email("E-mail adresi uygun değil."),
     password: Yup.string(),
   });
 
@@ -62,7 +62,7 @@ export default function CandidateUpdate() {
   return (
       <div>
       <Container className="content">
-        <Headline content="Update Candidate" />
+        <Headline content="Profil Duzenle" />
 
         <Grid>
           <Grid.Row>
@@ -74,7 +74,7 @@ export default function CandidateUpdate() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Input
                     name="firstName"
-                    label="First Name"
+                    label="İsim"
                     focus
                     placeholder={candidate.firstName}
                     onChange={(event, data) => handleChange("firstName", data.value)}
@@ -83,7 +83,7 @@ export default function CandidateUpdate() {
                   {formik.errors.firstName && formik.touched.firstName && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.firstName} /><br /><br /></span>}
                   <Form.Input
                     name="lastName"
-                    label="Last Name"
+                    label="Soyisim"
                     focus
                     placeholder={candidate.lastName}
                     onChange={(event, data) => handleChange("lastName", data.value)}
@@ -93,7 +93,7 @@ export default function CandidateUpdate() {
                   <Form.Group widths="equal">
                     <Form.Input
                       name="identityNumber"
-                      label="Identity Number"
+                      label="Kimlik Numarası"
                       focus
                       placeholder={candidate.identityNumber}
                       onChange={(event, data) => handleChange("identityNumber", data.value)}
@@ -101,7 +101,7 @@ export default function CandidateUpdate() {
                     />
                     <Form.Input
                       name="dateOfBirth"
-                      label="Date of Birth"
+                      label="Doğum Yili"
                       focus
                       placeholder={candidate.dateOfBirth}
                       onChange={(event, data) => handleChange("dateOfBirth", data.value)}
@@ -129,7 +129,7 @@ export default function CandidateUpdate() {
                   {formik.errors.email && formik.touched.email && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.email} /><br /><br /></span>}
                   <Form.Input
                     name="password"
-                    label="Password"
+                    label="Şifre"
                     focus
                     placeholder="* * * * * *"
                     onChange={(event, data) => handleChange("password", data.value)}
@@ -138,7 +138,7 @@ export default function CandidateUpdate() {
                   {formik.errors.password && formik.touched.password && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.password} /><br /><br /></span>}
                   <br />
                   
-                  <Button circular fluid type="submit" color="yellow" content="Update" disabled={!formik.dirty} />
+                  <Button circular fluid type="submit" color="yellow" content="Güncelle" disabled={!formik.dirty} />
                 </Form>
               </Formik>
             </Grid.Column>

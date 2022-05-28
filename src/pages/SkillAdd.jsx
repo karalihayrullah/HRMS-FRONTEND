@@ -23,7 +23,7 @@ export default function SkillAdd() {
   };
 
   const validationSchema = Yup.object({
-    skill: Yup.string().required("Required Field"),
+    skill: Yup.string().required("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -53,7 +53,7 @@ export default function SkillAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Skill" />
+        <Headline content="Uzmanlık Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -65,14 +65,14 @@ export default function SkillAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Input
                     name="skill"
-                    label="Skill"
+                    label="Uzmanlık"
                     onChange={(event, data) => handleChange("skill", data.value)}
                     value={formik.values.skill}
                   />
                   {formik.errors.skill && formik.touched.skill && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.skill} /><br /></span>}
                   <br />
 
-                  <Button circular fluid type="submit" color="yellow" content="Add" />
+                  <Button circular fluid type="submit" color="yellow" content="Ekle"  />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -80,7 +80,7 @@ export default function SkillAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
       </Container>
     </div>
   );

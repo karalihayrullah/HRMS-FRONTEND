@@ -35,7 +35,7 @@ export default function SkillDelete() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Delete Skill" />
+        <Headline content="Uzmanlık Sil" />
 
         <Grid>
           <Grid.Row>
@@ -46,7 +46,7 @@ export default function SkillDelete() {
                   {resume.id == id && (
                     <span key={resume.id}>
                       {resume.skills.length === 0
-                        ? <Segment raised textAlign="center" ><Header color="pink" content="No skill has been added to the resume yet." /></Segment>
+                        ? <Segment raised textAlign="center" ><Header color="pink" content="Henüz Uzmanlık Eklenmemiştir." /></Segment>
                         : <span>
                           <DateLabel value={new Date().toDateString()} />
                           <br /><br /><br />
@@ -69,7 +69,7 @@ export default function SkillDelete() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Deleted !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Silindi !" />
       </Container>
     </div>
   );

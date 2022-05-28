@@ -23,7 +23,7 @@ export default function CandidateDetail() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Candidate" />
+        <Headline content="Is Adayi" />
 
         <Grid>
           <Grid.Row>
@@ -34,9 +34,6 @@ export default function CandidateDetail() {
                   {resume.candidate?.id == id && (
                     <Grid.Row>
                       <Grid.Column>
-                        <Button circular compact floated="right" color="yellow" icon="pencil alternate" as={NavLink} to={`/candidates/resume/${resume.id}/edit`} />
-                        <Button circular compact floated="right" color="yellow" icon="cog" as={NavLink} to={`/candidates/candidate/${resume.candidate?.id}/update`} />
-                        <Button circular compact floated="right" color="pink" content="Favorites" as={NavLink} to={`/candidates/candidate/${resume.candidate?.id}/favoriteJobPostings`} />
                         {resume.image == null
                           ? <Image circular size="small" src="https://res.cloudinary.com/merveucer/image/upload/v1631964376/user_ckfrbd.svg" />
                           : <Image circular size="small" src={resume.image?.url} />}
@@ -71,14 +68,14 @@ export default function CandidateDetail() {
                         {resume.coverLetter === null
                           ? null
                           : <Segment raised>
-                              <Header as="h5" content="Cover Letter" className="orbitron" />
+                              <Header as="h5" content="Bilgilendirme" className="orbitron" />
                               <br />{resume.coverLetter?.content}<br /><br />
                             </Segment>}
 
                         {resume.educations.length === 0
                         ? null
                         : <Segment raised>
-                            <Header as="h5" content="Educations" className="orbitron" />
+                            <Header as="h5" content="Eğitimler" className="orbitron" />
                             <br />
                             {resume.educations.map((education) => (
                               <span>
@@ -99,7 +96,7 @@ export default function CandidateDetail() {
                         {resume.experiences.length === 0
                         ? null
                         : <Segment raised>
-                            <Header as="h5" content="Experiences" className="orbitron" />
+                            <Header as="h5" content="Tecrübeler" className="orbitron" />
                             <br />
                             {resume.experiences.map((experience) => (
                               <span>
@@ -120,7 +117,7 @@ export default function CandidateDetail() {
                         {resume.languageLevels.length === 0
                           ? null
                           : <Segment raised>
-                              <Header as="h5" content="Languages" className="orbitron" />
+                              <Header as="h5" content="Diller" className="orbitron" />
                               <br />
                               {resume.languageLevels.map((languageLevel) => (
                                 <span>
@@ -135,7 +132,7 @@ export default function CandidateDetail() {
                         {resume.skills.length === 0
                           ? null
                           : <Segment raised>
-                              <Header as="h5" content="Skills" className="orbitron" />
+                              <Header as="h5" content="Uzmanlık Alanları" className="orbitron" />
                               <br />
                               {resume.skills.map((skill) => (<span>・ {skill.skill}&nbsp;&nbsp;&nbsp;</span>))}
                               <br /><br />

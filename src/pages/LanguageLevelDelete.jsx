@@ -36,7 +36,7 @@ export default function LanguageLevelDelete() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Delete Language" />
+        <Headline content="Dil Sil" />
 
         <Grid>
           <Grid.Row>
@@ -47,7 +47,7 @@ export default function LanguageLevelDelete() {
                   {resume.id == id && (
                     <span key={resume.id}>
                       {resume.languageLevels.length === 0
-                        ? <Segment raised textAlign="center" ><Header color="pink" content="No language has been added to the resume yet." /></Segment>
+                        ? <Segment raised textAlign="center" ><Header color="pink" content="Henüz Dil Eklenmemiştir." /></Segment>
                         : <span>
                             <DateLabel value={new Date().toDateString()} />
                             <br /><br /><br />
@@ -72,7 +72,7 @@ export default function LanguageLevelDelete() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Deleted !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Silindi!" />
       </Container>
     </div>
   );

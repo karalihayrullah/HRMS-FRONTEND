@@ -19,7 +19,7 @@ export default function ResumeDetailsEdit() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Edit Resume Details" />
+        <Headline content="Ozgecmis" />
 
         <Grid>
           <Grid.Row>
@@ -33,35 +33,35 @@ export default function ResumeDetailsEdit() {
                 secondTo={`/candidates/resume/${resume.id}/link/delete`}
               />
               <ButtonsOfEdit
-                content="Cover Letter"
+                content="Bilgilendirme"
                 firstIcon="add"
                 secondIcon="pencil alternate"
                 firstTo={`/candidates/candidate/${resume.candidate?.id}/coverLetter/add`}
                 secondTo={`/candidates/candidate/${resume.candidate?.id}/coverLetter/edit`}
               />
               <ButtonsOfEdit
-                content="Education"
+                content="Eğitimler"
                 firstIcon="add"
                 secondIcon="trash"
                 firstTo={`/candidates/resume/${resume.id}/education/add`}
                 secondTo={`/candidates/resume/${resume.id}/education/delete`}
               />
               <ButtonsOfEdit
-                content="Experience"
+                content="Tecrübeler"
                 firstIcon="add"
                 secondIcon="trash"
                 firstTo={`/candidates/resume/${resume.id}/experience/add`}
                 secondTo={`/candidates/resume/${resume.id}/experience/delete`}
               />
               <ButtonsOfEdit
-                content="Language"
+                content="Dil"
                 firstIcon="add"
                 secondIcon="trash"
                 firstTo={`/candidates/resume/${resume.id}/languageLevel/add`}
                 secondTo={`/candidates/resume/${resume.id}/languageLevel/delete`}
               />
               <ButtonsOfEdit
-                content="Skill"
+                content="Uzmanlık"
                 firstIcon="add"
                 secondIcon="trash"
                 firstTo={`/candidates/resume/${resume.id}/skill/add`}

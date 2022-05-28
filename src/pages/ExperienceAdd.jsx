@@ -39,10 +39,10 @@ export default function ExperienceAdd() {
   };
 
   const validationSchema = Yup.object({
-    companyName: Yup.string().required("Required Field"),
-    jobTitle: Yup.object().required("Required Field"),
-    startingDate: Yup.date().required("Required Field"),
-    terminationDate: Yup.date("Required Field"),
+    companyName: Yup.string().required("Boş Bırakılamaz"),
+    jobTitle: Yup.object().required("Boş Bırakılamaz"),
+    startingDate: Yup.date().required("Boş Bırakılamaz"),
+    terminationDate: Yup.date("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -72,7 +72,7 @@ export default function ExperienceAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Experience" />
+        <Headline content="Tecrübe Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -84,14 +84,14 @@ export default function ExperienceAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Input
                     name="companyName"
-                    label="Company Name"
+                    label="Şirket İsmi"
                     onChange={(event, data) => handleChange("companyName", data.value)}
                     value={formik.values.companyName}
                   />
                   {formik.errors.companyName && formik.touched.companyName && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.companyName} /><br /><br /></span>}
                   <Form.Select
                     name="jobTitle"
-                    label="Job Title"
+                    label="Ünvan"
                     options={jobTitleOptions}
                     onChange={(event, data) => handleChange("jobTitle", data.value)}
                     value={formik.values.jobTitle}
@@ -100,14 +100,14 @@ export default function ExperienceAdd() {
                   <Form.Group widths="equal">
                     <Form.Input
                       name="startingDate"
-                      label="Starting Date"
+                      label="Başlangıç Tarihi"
                       placeholder="YYYY-MM-DD"
                       onChange={(event, data) => handleChange("startingDate", data.value)}
                       value={formik.values.startingDate}
                     />
                     <Form.Input
                       name="terminationDate"
-                      label="Termination Date (Optional)"
+                      label="Bitiş Tarihi "
                       placeholder="YYYY-MM-DD"
                       onChange={(event, data) => handleChange("terminationDate", data.value)}
                       value={formik.values.terminationDate}
@@ -125,7 +125,7 @@ export default function ExperienceAdd() {
                   </Grid>
                   <br />
 
-                  <Button circular fluid type="submit" color="yellow" content="Add" />
+                  <Button circular fluid type="submit" color="yellow" content="Ekle" />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -133,7 +133,7 @@ export default function ExperienceAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
       </Container>
     </div>
   );

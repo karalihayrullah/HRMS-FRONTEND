@@ -55,14 +55,14 @@ export default function CoverLetterEdit() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Edit Cover Letter" />
+        <Headline content="Bilgilendire Duzenleme" />
 
         <Grid>
           <Grid.Row>
             <Grid.Column width="3" />
             <Grid.Column width="10">
               {coverLetters.length === 0
-                ? <Segment raised textAlign="center" ><Header color="pink" content="No cover letter has been added." /></Segment>
+                ? <Segment raised textAlign="center" ><Header color="pink" content="Bilgilendirme eklenmemiş" /></Segment>
                 : <span>
                     <DateLabel value={new Date().toDateString()} />
                     <br /><br /><br />
@@ -71,10 +71,10 @@ export default function CoverLetterEdit() {
                      <div key={coverLetter.candidate?.id} className="coverLetterEdit">
                         <Segment raised>
                           {resume.id === coverLetter.resume?.id 
-                            ? <Button circular compact content="Remove from Resume" color="pink" floated="right" onClick={() =>  handleDeleteFromResume()} />
+                            ? <Button circular compact content="Özgeçmişten sil" color="pink" floated="right" onClick={() =>  handleDeleteFromResume()} />
                             : <span>
                                 <Button circular compact  icon="trash" color="pink" floated="right" onClick={() =>  handleDelete(coverLetter.id)} />
-                                <Button circular compact  content=" Add to Resume" color="pink" floated="right" onClick={() =>  handleAddedToResume(coverLetter.id)} />                          
+                                <Button circular compact  content=" Özgeçmişe Ekle" color="pink" floated="right" onClick={() =>  handleAddedToResume(coverLetter.id)} />                          
                               </span>}                      
                           <br />
                           <strong>{coverLetter.name}</strong>
@@ -87,9 +87,9 @@ export default function CoverLetterEdit() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModalDelete(false)} onOpen={() => handleModalDelete(true)} open={openDelete} content="Deleted !" />        
-        <MessageModal onClose={() => handleModalDeleteFromResume(false)} onOpen={() => handleModalDeleteFromResume(true)} open={openDeleteFromResume} content="Removed from resume !" />
-        <MessageModal onClose={() => handleModalAddedToResume(false)} onOpen={() => handleModalAddedToResume(true)} open={openAddedToResume} content="Added to resume !" />
+        <MessageModal onClose={() => handleModalDelete(false)} onOpen={() => handleModalDelete(true)} open={openDelete} content="Silindi !" />        
+        <MessageModal onClose={() => handleModalDeleteFromResume(false)} onOpen={() => handleModalDeleteFromResume(true)} open={openDeleteFromResume} content="Özgeçmişten Kaldırıldı !" />
+        <MessageModal onClose={() => handleModalAddedToResume(false)} onOpen={() => handleModalAddedToResume(true)} open={openAddedToResume} content="Özgeçmişe Eklendi !" />
       </Container>
     </div>
   );

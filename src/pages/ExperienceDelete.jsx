@@ -35,7 +35,7 @@ export default function ExperienceDeelet() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Delete Experience" />
+        <Headline content="Tecrübe Sil" />
 
         <Grid>
           <Grid.Row>
@@ -46,7 +46,7 @@ export default function ExperienceDeelet() {
                   {resume.id == id && (
                     <span key={resume.id}>
                       {resume.experiences.length === 0
-                        ? <Segment raised textAlign="center" ><Header color="pink" content="No experience has been added to the resume yet." /></Segment>
+                        ? <Segment raised textAlign="center" ><Header color="pink" content="Henüz Tecrübe Eklenmemiştir" /></Segment>
                         : <span>
                             <DateLabel value={new Date().toDateString()} />
                             <br /><br /><br />
@@ -60,11 +60,11 @@ export default function ExperienceDeelet() {
                                 {experience.companyName}
                                 <br />
                                 <span className="extra">
-                                  {new Date(experience.startingDate).getMonth()}.{new Date(experience.startingDate).getFullYear()}
+                                {new Date(experience.startingDate).getDay()}.{new Date(experience.startingDate).getMonth()}.{new Date(experience.startingDate).getFullYear()}
                                   &nbsp;-&nbsp;
                                   {experience.terminationDate === "Devam ediyor."
                                     ? "Continues"
-                                    : new Date(experience.terminationDate).getMonth() + "." + new Date(experience.terminationDate).getFullYear()}
+                                    : new Date(experience.terminationDate).getDay() + "." +new Date(experience.terminationDate).getMonth() + "." + new Date(experience.terminationDate).getFullYear()}
                                 </span>
                                 <br /><br />
                               </Segment>))}
@@ -78,7 +78,7 @@ export default function ExperienceDeelet() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Deleted !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Silindi !" />
       </Container>
     </div>
   );

@@ -35,7 +35,7 @@ export default function EducationDelete() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Delete Education" />
+        <Headline content="Universite Sil" />
 
         <Grid>
           <Grid.Row>
@@ -46,7 +46,7 @@ export default function EducationDelete() {
                   {resume.id == id && (
                     <span key={resume.id}>
                       {resume.educations.length === 0
-                        ? <Segment raised textAlign="center" ><Header color="pink" content="No education has been added to the resume yet." /></Segment>
+                        ? <Segment raised textAlign="center" ><Header color="pink" content="Henüz Üniversite Eklenmemiştir." /></Segment>
                         : <span>
                             <DateLabel value={new Date().toDateString()} />
                             <br /><br /><br />
@@ -78,7 +78,7 @@ export default function EducationDelete() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Deleted !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Siliniyor !" />
       </Container>
     </div>
   );

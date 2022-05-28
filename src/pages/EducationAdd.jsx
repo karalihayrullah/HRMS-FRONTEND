@@ -27,10 +27,10 @@ export default function EducationAdd() {
   };
 
   const validationSchema = Yup.object({
-    nameOfEducationalInstitution: Yup.string().required("Required Field"),
-    department: Yup.string().required("Required Field"),
-    degree: Yup.string().required("Required Field"),
-    startingDate: Yup.date().required("Required Field"),
+    nameOfEducationalInstitution: Yup.string().required("Boş Bırakılamaz"),
+    department: Yup.string().required("Boş Bırakılamaz"),
+    degree: Yup.string().required("Boş Bırakılamaz"),
+    startingDate: Yup.date().required("Boş Bırakılamaz"),
     graduationDate: Yup.date(),
   });
 
@@ -61,7 +61,7 @@ export default function EducationAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Education" />
+        <Headline content="Universite Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -73,21 +73,21 @@ export default function EducationAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Input
                     name="nameOfEducationalInstitution"
-                    label="Name of Educational Institution"
+                    label="Üniversite"
                     onChange={(event, data) => handleChange("nameOfEducationalInstitution", data.value)}
                     value={formik.values.nameOfEducationalInstitution}
                   />
                   {formik.errors.nameOfEducationalInstitution && formik.touched.nameOfEducationalInstitution && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.nameOfEducationalInstitution} /><br /><br /></span>}
                   <Form.Input
                     name="department"
-                    label="Department"
+                    label="Bölüm"
                     onChange={(event, data) => handleChange("department", data.value)}
                     value={formik.values.department}
                   />
                   {formik.errors.department && formik.touched.department && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.department} /><br /><br /></span>}
                   <Form.Input
                     name="degree"
-                    label="Degree"
+                    label="Lisans"
                     onChange={(event, data) => handleChange("degree", data.value)}
                     value={formik.values.degree}
                   />
@@ -95,14 +95,14 @@ export default function EducationAdd() {
                   <Form.Group widths="equal">
                     <Form.Input
                       name="startingDate"
-                      label="Starting Date"
+                      label="Başlangıç Tarihi"
                       placeholder="YYYY-MM-DD"
                       onChange={(event, data) => handleChange("startingDate", data.value)}
                       value={formik.values.startingDate}
                     />                    
                     <Form.Input
                       name="graduationDate"
-                      label="Graduation Date (Optional)"
+                      label="Mezuniyet Tarihi"
                       placeholder="YYYY-MM-DD"
                       onChange={(event, data) => handleChange("graduationDate", data.value)}
                       value={formik.values.graduationDate}
@@ -120,7 +120,7 @@ export default function EducationAdd() {
                   </Grid>
                   <br />
 
-                  <Button circular fluid type="submit" color="yellow" content="Add" />
+                  <Button circular fluid type="submit" color="yellow" content="Ekle" />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -128,7 +128,7 @@ export default function EducationAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
       </Container>
     </div>
   );

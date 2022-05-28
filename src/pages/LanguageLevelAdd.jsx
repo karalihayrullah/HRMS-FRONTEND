@@ -47,8 +47,8 @@ export default function LanguageLevelAdd() {
   };
 
   const validationSchema = Yup.object({
-    language: Yup.object().required("Required Field"),
-    level: Yup.object().required("Required Field"),
+    language: Yup.object().required("Boş Bırakılamaz"),
+    level: Yup.object().required("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -78,7 +78,7 @@ export default function LanguageLevelAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Language" />
+        <Headline content="Dil Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -90,7 +90,7 @@ export default function LanguageLevelAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Select
                     name="language"
-                    label="Language"
+                    label="Dil"
                     options={languageOptions}
                     onChange={(event, data) => handleChange("language", data.value)}
                     value={formik.values.language}
@@ -98,7 +98,7 @@ export default function LanguageLevelAdd() {
                   {formik.errors.language && formik.touched.language && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.language} /><br /><br /></span>}
                   <Form.Select
                     name="level"
-                    label="Level"
+                    label="Seviye"
                     options={levelOptions}
                     onChange={(event, data) => handleChange("level", data.value)}
                     value={formik.values.level}
@@ -106,7 +106,7 @@ export default function LanguageLevelAdd() {
                   {formik.errors.language && formik.touched.language && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.language} /><br /></span>}
                   <br />
                   
-                  <Button circular fluid type="submit" color="yellow" content="Add" />
+                  <Button circular fluid type="submit" color="yellow" content="Ekle" />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -114,7 +114,7 @@ export default function LanguageLevelAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi!" />
       </Container>
     </div>
   );

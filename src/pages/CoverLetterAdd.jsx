@@ -22,8 +22,8 @@ export default function CoverLetterAdd() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Required Field"),
-    content: Yup.string().max(1150, "Over 1150 Characters").required("Required Field"),
+    name: Yup.string().required("Boş Bırakılamaz"),
+    content: Yup.string().max(1150, "Over 1150 Characters").required("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -52,7 +52,7 @@ export default function CoverLetterAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Cover Letter" />
+        <Headline content="Bilgilendirme Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -64,22 +64,22 @@ export default function CoverLetterAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Input
                     name="name"
-                    label="Name"
-                    onChange={(event, data) => handleChange("name", data.value)}
+                    label="İsim"
+                    onChange={(event, data) => handleChange("isim", data.value)}
                     value={formik.values.name}
                   />
                   {formik.errors.name && formik.touched.name && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.name} /><br /><br /></span>}
                   <Form.TextArea
                     name="content"
-                    label="Content"
+                    label="İçerik"
                     placeholder=". . ."
-                    onChange={(event, data) => handleChange("content", data.value)}
+                    onChange={(event, data) => handleChange("içerik", data.value)}
                     value={formik.values.content}
                   />
                   {formik.errors.content && formik.touched.content && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.content} /><br /></span>}
                   <br />
 
-                  <Button circular fluid type="submit" color="yellow" content="Add" />
+                  <Button circular fluid type="submit" color="yellow" content="Eklee" />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -87,7 +87,7 @@ export default function CoverLetterAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
       </Container>
     </div>
   );
