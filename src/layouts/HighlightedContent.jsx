@@ -16,11 +16,11 @@ export default function HighlightedContent() {
           <Divider hidden />
           <Segment basic>
             <Header color="blue" textAlign="right">
-              <span className="headline-2">İş Arıyorsan</span>
+              <span className="headline-2">Is Arıyorsan</span>
             </Header>
             <br />
             <Header color="green" textAlign="right">
-              <span className="headline-1">Doğru Yerdesin</span>
+              <span className="headline-1">Dogru Yerdesin</span>
               
             </Header>
           </Segment>

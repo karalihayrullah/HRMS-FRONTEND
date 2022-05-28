@@ -24,7 +24,8 @@ export default function Navi() {
                 </Menu.Item>
                 <Menu.Item as={NavLink} to="/home" icon="home" content="ANASAYFA" />
                 <Menu.Item as={NavLink} to="/jobPostings" icon="list alternate outline" content="İŞ İLANLARI" />
-                <Menu.Item as={NavLink} to="/candidates" icon="building outline" content="İŞ VERENLER" />
+                <Menu.Item as={NavLink} to="/candidates" icon="user outline" content="İŞ ADAYLARI" />
+                <Menu.Item as={NavLink} to="/employers" icon="building outline" content="İŞ VERENLER" />
                 <Menu.Menu position="right"  >
                     <Menu.Item position="right" fitted>
                         {isAuthenticated?<LogIn signOut={handleSignOut}/>:<LogOut signIn={handleSignIn}/> }

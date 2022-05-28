@@ -43,7 +43,7 @@ export default function LogOut() {
                                     color="green"
                                     content="İş Arayan"
                                     as={NavLink}
-                                    to={"#"}
+                                    to={"/candidate/signIn"}
                                     onClick={() => setOpen(false)}
                                 ></Button>
                             </Grid.Column>
@@ -59,7 +59,7 @@ export default function LogOut() {
                                     color="blue"
                                     content="İş Veren"
                                     as={NavLink}
-                                    to={"#"}
+                                    to={"/employer/signIn"}
                                     onClick={() => setOpen(false)}
                                 ></Button>
                             </Grid.Column>

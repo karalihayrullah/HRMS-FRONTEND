@@ -1,15 +1,15 @@
 import React from "react";
 import Headline from "./Headline";
-import JobPostingList from "../pages/JobPostingList";
+import EmployerList from "../pages/EmployerList";
 import { Container } from "semantic-ui-react";
 
-export default function JobPostingLayout() {
+export default function EmployerLayout() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Is Ilanları" />
-
-        <JobPostingList type="filtered" itemsPerRow="2" />
+        <Headline content="Is Verenler" />
+        
+        <EmployerList />
       </Container>
     </div>
   );

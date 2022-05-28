@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import JobPostingService from "../services/JobPostingService";
-import FavoriteJobPostingService from "./../services/favoriteJobPostingService";
 import CityService from "../services/cityService";
 import JobTitleService from "../services/jobTitleService";
 import WorkingTimeService from "../services/workingTimeService";
@@ -11,7 +10,6 @@ import { Card, Label, Button, Icon, Grid, Form } from "semantic-ui-react";
 
 export default function JobPostingList({ type, itemsPerRow, id }) {
   const [jobPostings, setJobPostings] = useState([]);
-  const [favoriteJobPostings, setFavoriteJobPostings] = useState([]);
   const [cities, setCities] = useState([]);
   const [jobTitles, setJobTitles] = useState([]);
   const [workingTimes, setWorkingTimes] = useState([]);
@@ -26,7 +24,6 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
   const [numberOfData, setNumberOfData] = useState(0);
 
   let jobPostingService = new JobPostingService();
-  let favoriteJobPostingService = new FavoriteJobPostingService();
   let cityService = new CityService();
   let jobTitleService = new JobTitleService();
   let workingTimeService = new WorkingTimeService();
@@ -44,9 +41,6 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
       workingTypeService.getAll().then((result) => setWorkingTypes(result.data.data));
     } else if (type === "recently") {
       jobPostingService.getAllActiveOnesSortedByPostingDateTop6().then((result) => setJobPostings(result.data.data));
-    } else if (type === "favorites") {
-      favoriteJobPostingService.getAllActiveJobPostingsByCandidateIdSortedByDateOfAddToFavorites(id).then((result) => setJobPostings(result.data.data));
-      favoriteJobPostingService.getAllByCandidateId(id).then((result) => setFavoriteJobPostings(result.data.data));
     } else if (type === "byEmployer") {
       jobPostingService.getAllActiveOnesByEmployerIdSortedByPostingDate(id).then((result) => setJobPostings(result.data.data));
     }
@@ -81,14 +75,6 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
     value: workingType.id,
   })));
 
-  const handleAddToFavorites = (jobPosting) => {    
-    favoriteJobPostingService.add({jobPosting, candidate:{id: 8}}); // TODO: candidateId
-  };
-
-  const handleRemoveFromFavorites = (jobPosting) => {
-    favoriteJobPostings.map((favoriteJobPosting) => (favoriteJobPosting.jobPosting?.id == jobPosting.id && favoriteJobPostingService.delete(favoriteJobPosting.id)));
-    window.location.reload();
-  };
 
   const handlePreviousPage = () => {
     if (pageNo != 1) {
@@ -158,17 +144,13 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
             {jobPostings.map((jobPosting) => (
               <Card raised key={jobPosting.id}>
                 <Card.Content>
-                  {type === "favorites"
-                    ? <Button compact circular color="yellow" icon="minus" floated="right" onClick={() => handleRemoveFromFavorites(jobPosting)} />
-                    : <Button compact circular color="yellow" icon="bookmark" floated="right" onClick={() => handleAddToFavorites(jobPosting)} />}
-                    
                   <Card.Header className="montserrat">
                     {jobPosting.jobTitle?.title}
                   </Card.Header>
                   <Card.Meta>
                     {jobPosting.employer?.companyName}
                     <br />
-                    <strong>İşe alınacak sayısı</strong>
+                    <strong>Açık pozisyon sayısı</strong>
                     &nbsp;
                     <Label circular color="pink" className="orbitron" content={jobPosting.numberOfOpenPositions} />
                   </Card.Meta>
@@ -219,9 +201,9 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
             />
             <br />
 
-            <Button circular fluid color="yellow" content="Filter" onClick={() => handleFilter()} />
+            <Button circular fluid color="yellow" content="Filtrele" onClick={() => handleFilter()} />
             <br />
-            <Button circular fluid color="pink" content="Clear Filter" onClick={() => handleClearFilter()} />
+            <Button circular fluid color="pink" content="Temizle" onClick={() => handleClearFilter()} />
           </Form>
         </Grid.Column>} 
       </Grid.Row>
