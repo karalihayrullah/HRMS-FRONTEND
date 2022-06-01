@@ -5,12 +5,17 @@ import Headline from "./../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
 import MessageModal from "./../layouts/MessageModal";
 import { Container, Grid, Label, Form, Button } from "semantic-ui-react";
+import CandidateService from "./../services/candidateService"
+import { useHistory } from "react-router";
+import { toast } from 'react-toastify'
 
 export default function CandidateAdd() {
   const [open, setOpen] = useState(false);
 
+  let candidateService = new CandidateService();
 
 
+  const history = useHistory()
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -24,20 +29,41 @@ export default function CandidateAdd() {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Boş Bırakılamaz"),
     lastName: Yup.string().required("Boş Bırakılamaz"),
-    identityNumber: Yup.string().length(11 ,"11 Karakter olmalıdır").required("Boş Bırakılamaz"),
+    identityNumber: Yup.string().length(11, "11 Karakter olmalıdır").required("Boş Bırakılamaz"),
     dateOfBirth: Yup.date().required("Boş Bırakılamaz"),
     email: Yup.string().email("E-mail Uygun Değil").required("Boş Bırakılamaz"),
     password: Yup.string().required("Boş Bırakılamaz"),
-    confirmPassword: Yup.string().required("Boş Bırakılamaz"),
+    confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], 'Şifre Eşleşmiyor'),
   });
 
+  function handleCandidateValues(values) {
+    return {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      birthYear: values.birthYear,
+      nationalityId: values.nationalityId,
+      email: values.email,
+      password: values.password,
+    }
+  }
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
     handleModal(true);
     setTimeout(() => {
       resetForm();
     }, 100);
+
+    candidateService.add(handleCandidateValues(values)).then(result => {
+      if (result.data.success) {
+        toast.success(result.data.message)
+        history.push("/candidate")
+      } else {
+        toast.error(result.data.message)
+      }
+    })
   };
+
+
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -129,8 +155,8 @@ export default function CandidateAdd() {
                   />
                   {formik.errors.confirmPassword && formik.touched.confirmPassword && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.confirmPassword} /><br /></span>}
                   <br />
-                  
-                  <Button circular fluid type="submit" color="yellow" content="Sign up" />
+
+                  <Button circular fluid type="submit" color="yellow" content="Kayıt Ol" />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -138,7 +164,7 @@ export default function CandidateAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="An activation e-mail has been sent !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Kayıt Başarılı !" />
       </Container>
     </div>
   );

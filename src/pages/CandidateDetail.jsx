@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { useParams } from "react-router";
 import Headline from "./../layouts/Headline";
 import ResumeService from "./../services/resumeService";
 import GithubButton from "./../layouts/GithubButton";
 import LinkedinButton from "./../layouts/LinkedinButton";
 import DateLabel from "./../layouts/DateLabel";
-import { Container, Grid, Header, Image, Segment, Divider, Icon, Button } from "semantic-ui-react";
+import { Container, Grid, Header, Image, Segment, Divider, Icon} from "semantic-ui-react";
 import LanguageLevelIcons from "./../layouts/LanguageLevelIcons";
 
 export default function CandidateDetail() {

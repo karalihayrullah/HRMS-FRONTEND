@@ -10,32 +10,26 @@ export default class JobPostingService {
         return axios.get(`http://localhost:8080/api/jobPostings/getById?id=${id}`);
     }
     
-    makeActiveOrPassive(id, isActive) {
-        return axios.put(`http://localhost:8080/api/jobPostings/makeActiveOrPassive?id=${id}&isActive=${isActive}`)
+    getAll(){
+        return axios.get("http://localhost:8080/api/jobPostings/getAll");
     }
 
-    confirm(companyStaffId, isConfirmed, jobPostingConfirmationTypeId, jobPostingId) {
-        return axios.put(`http://localhost:8080/api/jobPostings/confirm?companyStaffId=${companyStaffId}&isConfirmed=${isConfirmed}&jobPostingConfirmationTypeId=${jobPostingConfirmationTypeId}&jobPostingId=${jobPostingId}`);
+    getAllSortedByPostingDateTop6() {
+        return axios.get("http://localhost:8080/api/jobPostings/getAllSortedByPostingDateTop6");
     }
 
-    getAllActiveOnesSortedByPostingDateTop6() {
-        return axios.get("http://localhost:8080/api/jobPostings/getAllActiveOnesSortedByPostingDateTop6");
+    getAllByEmployerIdSortedByPostingDate(employerId) {
+        return axios.get(`http://localhost:8080/api/jobPostings/getAllByEmployerIdSortedByPostingDate?employerId=${employerId}`);
     }
 
-    getAllActiveOnesByEmployerIdSortedByPostingDate(employerId) {
-        return axios.get(`http://localhost:8080/api/jobPostings/getAllActiveOnesByEmployerIdSortedByPostingDate?employerId=${employerId}`);
+    getAllFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId) {
+        return axios.get(`http://localhost:8080/api/jobPostings/getAllFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType?cityId=${cityId}&jobTitleId=${jobTitleId}&workingTimeId=${workingTimeId}&workingTypeId=${workingTypeId}`);
     }
 
-    getAllActiveOnesFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId) {
-        return axios.get(`http://localhost:8080/api/jobPostings/getAllActiveOnesFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType?cityId=${cityId}&jobTitleId=${jobTitleId}&workingTimeId=${workingTimeId}&workingTypeId=${workingTypeId}`);
+    getAllByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize) {
+        return axios.get(`http://localhost:8080/api/jobPostings/getAllByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType?cityId=${cityId}&jobTitleId=${jobTitleId}&pageNo=${pageNo}&pageSize=${pageSize}&workingTimeId=${workingTimeId}&workingTypeId=${workingTypeId}`);
     }
 
-    getAllActiveOnesByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize) {
-        return axios.get(`http://localhost:8080/api/jobPostings/getAllActiveOnesByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType?cityId=${cityId}&jobTitleId=${jobTitleId}&pageNo=${pageNo}&pageSize=${pageSize}&workingTimeId=${workingTimeId}&workingTypeId=${workingTypeId}`);
-    }
 
-    getAllOnesThatWaitingForPostingConfirmation() {
-        return axios.get("http://localhost:8080/api/jobPostings/getAllOnesThatWaitingForPostingConfirmation");
-    }
 
 }

@@ -1,27 +1,36 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
 import MessageModal from "./../layouts/MessageModal";
 import { Container, Grid, Form, Label, Button } from "semantic-ui-react";
-
+import CandidateService from "../services/candidateService";
+import { toast } from "react-toastify";
 export default function CandidateSıgnIn() {
-    let { userName, password } = useParams();
+
+    
+    let candidateService = new CandidateService()
 
     const [open, setOpen] = useState(false);
 
 
     const initialValues = {
-        userName: { userName: userName },
-        passwordd: {password: password},
+        email: "",
+        password:"",
     };
 
     const validationSchema = Yup.object({
-        userName: Yup.string().required("Boş Bırakılamaz"),
-        passwordd: Yup.string().required("Boş Bırakılamaz"),
+        email: Yup.string().email().required("Boş Bırakılamaz"),
+        password: Yup.string().required("Boş Bırakılamaz"),
     });
+
+    function handleCandidateValues(values){
+        return {
+            email: values.email,
+            password : values.password,
+        }
+    }
 
     const onSubmit = (values, { resetForm }) => {
         console.log(values);
@@ -29,6 +38,14 @@ export default function CandidateSıgnIn() {
         setTimeout(() => {
             resetForm();
         }, 100);
+
+        candidateService.login(handleCandidateValues(values)).then(result=>{
+            if (result.data.success) {
+                toast.success(result.data.message)
+            } else {
+                toast.error(result.data.message)
+            }
+        })
     };
 
     const formik = useFormik({
@@ -59,19 +76,20 @@ export default function CandidateSıgnIn() {
                             <Formik>
                                 <Form onSubmit={formik.handleSubmit}>
                                     <Form.Input
-                                        name="userName"
-                                        label="Kullanıcı Adı"
-                                        onChange={(event, data) => handleChange("userName", data.value)}
-                                        value={formik.values.skill}
+                                        name="email"
+                                        label="Email"
+                                        onChange={(event, data) => handleChange("email", data.value)}
+                                        value={formik.values.email}
                                     />
+                                    {formik.errors.email && formik.touched.email && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.email} /><br /></span>}
 
                                     <Form.Input
-                                        name="passwordd"
+                                        name="password"
                                         label="Şifre"
                                         onChange={(event, data) => handleChange("password", data.value)}
-                                        value={formik.values.skill}
+                                        value={formik.values.password}
                                     />
-                                    {formik.errors.skill && formik.touched.skill && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.skill} /><br /></span>}
+                                    {formik.errors.password && formik.touched.password && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.password} /><br /></span>}
                                     <br />
 
                                     <Button circular fluid type="submit" color="yellow" content="Giris Yap" />
@@ -82,7 +100,7 @@ export default function CandidateSıgnIn() {
                     </Grid.Row>
                 </Grid>
 
-                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
             </Container>
         </div>
     );

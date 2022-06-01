@@ -23,7 +23,7 @@ export default function CoverLetterAdd() {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Boş Bırakılamaz"),
-    content: Yup.string().max(1150, "Over 1150 Characters").required("Boş Bırakılamaz"),
+    content: Yup.string().max(1150, "En fazla 1150 karakter girebilirsiniz").required("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {

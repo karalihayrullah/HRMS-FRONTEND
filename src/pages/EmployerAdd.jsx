@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Formik,useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "./../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
 import MessageModal from "./../layouts/MessageModal";
+import EmployerService from "./../services/employerService"
 import { Container, Grid, Label, Form, Button } from "semantic-ui-react";
 
 export default function EmployerAdd() {
   const [open, setOpen] = useState(false);
 
+  let employerService = new EmployerService()
 
   const initialValues = {
     companyName: "",
@@ -21,12 +23,25 @@ export default function EmployerAdd() {
 
   const validationSchema = Yup.object({
     companyName: Yup.string().required("Boş Bırakılamaz"),
-    phoneNumber: Yup.string().length(11,"Doğru Formatta Girdiğinizden Emin Olunuz.").required("Boş Bırakılamaz"),
+    phoneNumber: Yup.string().length(11, "Doğru Formatta Girdiğinizden Emin Olunuz.").required("Boş Bırakılamaz"),
     webAddress: Yup.string().required("Boş Bırakılamaz"),
     email: Yup.string().email("Email uygun değil").required("Boş Bırakılamaz"),
     password: Yup.string().required("Boş Bırakılamaz"),
     confirmPassword: Yup.string().required("Boş Bırakılamaz"),
   });
+
+  function handleEmployerValues(values) {
+    return {
+      companyName: values.companyName,
+      phoneNumber: values.phoneNumber,
+      webAddress: values.webAddress,
+      email: values.email,
+      password: values.password,
+      confirmPassword: values.confirmPassword
+    }
+  }
+
+
 
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -34,6 +49,9 @@ export default function EmployerAdd() {
     setTimeout(() => {
       resetForm();
     }, 100);
+
+    employerService.add(handleEmployerValues(values))
+
   };
 
   const formik = useFormik({
@@ -80,7 +98,7 @@ export default function EmployerAdd() {
                   {formik.errors.phoneNumber && formik.touched.phoneNumber && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.phoneNumber} /><br /><br /></span>}
                   <Form.Input
                     name="webAddress"
-                    label="Web Adresi (E-mail domaini ile şirket ismi aynı olmalıdır.)"
+                    label="Web Adresi "
                     placeholder="example.com"
                     onChange={(event, data) => handleChange("webAddress", data.value)}
                     value={formik.values.webAddress}
@@ -88,7 +106,7 @@ export default function EmployerAdd() {
                   {formik.errors.webAddress && formik.touched.webAddress && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.webAddress} /><br /><br /></span>}
                   <Form.Input
                     name="email"
-                    label="E-mail"
+                    label="E-mail (E-mail domaini ile şirket ismi aynı olmalıdır.)"
                     placeholder="example@example.com"
                     onChange={(event, data) => handleChange("email", data.value)}
                     value={formik.values.email}
@@ -117,8 +135,7 @@ export default function EmployerAdd() {
             <Grid.Column width="3" />
           </Grid.Row>
         </Grid>
-
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="An activation e-mail has been sent !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Kayıt Başarılı!" />
       </Container>
     </div>
   );

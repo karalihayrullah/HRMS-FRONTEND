@@ -1,26 +1,32 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
 import MessageModal from "./../layouts/MessageModal";
+import EmployerService from "../services/employerService";
 import { Container, Grid, Form, Label, Button } from "semantic-ui-react";
 
 export default function EmployerSıgnIn() {
-    let { companyName, password } = useParams();
-
     const [open, setOpen] = useState(false);
 
+    let employerService = new EmployerService()
+
+    function handleEmployerValues(values) {
+        return {
+            email: values.email,
+            password: values.password,
+        }
+    }
 
     const initialValues = {
-        companyName: { companyName: companyName },
-        passwordd: {password: password},
+        email: "",
+        password: "",
     };
 
     const validationSchema = Yup.object({
-        companyName: Yup.string().required("Boş Bırakılamaz"),
-        passwordd: Yup.string().required("Boş Bırakılamaz"),
+        email: Yup.string().email().required("Boş Bırakılamaz"),
+        password: Yup.string().required("Boş Bırakılamaz")
     });
 
     const onSubmit = (values, { resetForm }) => {
@@ -29,6 +35,8 @@ export default function EmployerSıgnIn() {
         setTimeout(() => {
             resetForm();
         }, 100);
+
+        employerService.login(handleEmployerValues(values))
     };
 
     const formik = useFormik({
@@ -59,19 +67,20 @@ export default function EmployerSıgnIn() {
                             <Formik>
                                 <Form onSubmit={formik.handleSubmit}>
                                     <Form.Input
-                                        name="companyName"
-                                        label="Şirket Adı"
-                                        onChange={(event, data) => handleChange("companyName", data.value)}
-                                        value={formik.values.skill}
+                                        name="email"
+                                        label="Email"
+                                        onChange={(event, data) => handleChange("email", data.value)}
+                                        value={formik.values.email}
                                     />
-
+                                    {formik.errors.email && formik.touched.email && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.email} /><br /></span>}
+                                    <br />
                                     <Form.Input
-                                        name="passwordd"
+                                        name="password"
                                         label="Şifre"
                                         onChange={(event, data) => handleChange("password", data.value)}
-                                        value={formik.values.skill}
+                                        value={formik.values.password}
                                     />
-                                    {formik.errors.skill && formik.touched.skill && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.skill} /><br /></span>}
+                                    {formik.errors.password && formik.touched.password && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.password} /><br /></span>}
                                     <br />
 
                                     <Button circular fluid type="submit" color="yellow" content="Giris Yap" />
@@ -82,7 +91,7 @@ export default function EmployerSıgnIn() {
                     </Grid.Row>
                 </Grid>
 
-                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Giriş Başarılı !" />
             </Container>
         </div>
     );

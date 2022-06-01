@@ -10,7 +10,7 @@ import EmployerLayout from './EmployerLayout'
 import EmployerDetail from '../pages/EmployerDetail'
 import CandidateAdd from "./../pages/CandidateAdd";
 import EmployerAdd from "./../pages/EmployerAdd";
-import CandidateSıgnIn from "./../pages/CandidateSıgnIn"
+import CandidateSıgnIn from '../pages/CandidateSıgnIn'
 import EmployerSıgnIn from "./../pages/EmployerSıgnIn"
 import CandidateLayout from './CandidateLayout'
 import CandidateDetail from '../pages/CandidateDetail'

@@ -33,16 +33,16 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
 
   useEffect(() => {
     if (type === "filtered") {
-      jobPostingService.getAllActiveOnesByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize).then((result) => setJobPostings(result.data.data));
-      jobPostingService.getAllActiveOnesFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId).then((result) => setNumberOfData(result.data.data.length));
+      jobPostingService.getAllByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize).then((result) => setJobPostings(result.data.data));
+      jobPostingService.getAllFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId).then((result) => setNumberOfData(result.data.data.length));
       cityService.getAll().then((result) => setCities(result.data.data));
       jobTitleService.getAll().then((result) => setJobTitles(result.data.data));
       workingTimeService.getAll().then((result) => setWorkingTimes(result.data.data));
       workingTypeService.getAll().then((result) => setWorkingTypes(result.data.data));
     } else if (type === "recently") {
-      jobPostingService.getAllActiveOnesSortedByPostingDateTop6().then((result) => setJobPostings(result.data.data));
+      jobPostingService.getAllSortedByPostingDateTop6().then((result) => setJobPostings(result.data.data));
     } else if (type === "byEmployer") {
-      jobPostingService.getAllActiveOnesByEmployerIdSortedByPostingDate(id).then((result) => setJobPostings(result.data.data));
+      jobPostingService.getAllByEmployerIdSortedByPostingDate(id).then((result) => setJobPostings(result.data.data));
     }
 
   }, [pageNo, pageSize, numberOfData]);
@@ -112,8 +112,8 @@ export default function JobPostingList({ type, itemsPerRow, id }) {
   const handleFilter = () =>  {
     setPageNo(1);
     setPageSize(10);
-    jobPostingService.getAllActiveOnesFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId).then((result) => setNumberOfData(result.data.data.length));
-    jobPostingService.getAllActiveOnesByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize).then((result) => setJobPostings(result.data.data));
+    jobPostingService.getAllFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId).then((result) => setNumberOfData(result.data.data.length));
+    jobPostingService.getAllByPageFilteredByCityAndJobTitleAndWorkingTimeAndWorkingType(cityId, jobTitleId, workingTimeId, workingTypeId, pageNo, pageSize).then((result) => setJobPostings(result.data.data));
   };
 
   const handleClearFilter = () => {

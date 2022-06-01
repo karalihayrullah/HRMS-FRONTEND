@@ -6,13 +6,13 @@ import LogOut from './LogOut';
 
 export default function Navi() {
 
-    const [isAuthenticated, setIsAuthnticated] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     function handleSignOut(){
-        setIsAuthnticated(false)
+        setIsAuthenticated(false)
     }
     function handleSignIn(){
-        setIsAuthnticated(true)
+        setIsAuthenticated(true)
     }
 
     return (

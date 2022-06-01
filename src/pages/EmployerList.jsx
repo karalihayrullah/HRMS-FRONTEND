@@ -9,7 +9,7 @@ export default function EmployerList() {
   let employerService = new EmployerService();
 
   useEffect(() => {
-    employerService.getAllByIsConfirmedAndUserConfirmationTypeIdSortedByCompanyName(true, 1).then((result) => setEmployers(result.data.data));
+    employerService.getAll().then((result) => setEmployers(result.data.data));
   }, []);
 
   return (

@@ -7,7 +7,7 @@ export default function CandidateLayout() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Candidates" />
+        <Headline content="Is Adaylari" />
 
         <CandidateList />
       </Container>

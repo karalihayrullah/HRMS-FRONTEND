@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default class EmployerService {
 
+    add(employer){
+        return axios.post("http://localhost:8080/api/employers/add",employer)
+    }
+
     update(values) {
         return axios.put("http://localhost:8080/api/employers/update", values);
     }
@@ -10,24 +14,12 @@ export default class EmployerService {
         return axios.get(`http://localhost:8080/api/employers/getById?id=${id}`);
     }
 
-    confirm(companyStaffId, employerId, isConfirmed, userConfirmationTypeId) {
-        return axios.put(`http://localhost:8080/api/employers/confirm?companyStaffId=${companyStaffId}&employerId=${employerId}&isConfirmed=${isConfirmed}&userConfirmationTypeId=${userConfirmationTypeId}`);
+    getAll(){
+        return axios.get("http://localhost:8080/api/employers/getAll")
     }
 
-    getAllByIsConfirmedAndUserConfirmationTypeIdSortedByCompanyName(isConfirmed, userConfirmationTypeId) {
-        return axios.get(`http://localhost:8080/api/employers/getAllByIsConfirmedAndUserConfirmationTypeIdSortedByCompanyName?isConfirmed=${isConfirmed}&userConfirmationTypeId=${userConfirmationTypeId}`);
-    }
-
-    getAllOnesThatWaitingForAccountConfirmation() {
-        return axios.get("http://localhost:8080/api/employers/getAllOnesThatWaitingForAccountConfirmation")
-    }
-
-    getAllOnesThatWaitingForUpdateConfirmation() {
-        return axios.get("http://localhost:8080/api/employers/getAllOnesThatWaitingForUpdateConfirmation")
-    }
-
-    getOneThatWaitingForUpdateConfirmationById(id) {
-        return axios.get(`http://localhost:8080/api/employers/getOneThatWaitingForUpdateConfirmationById?id=${id}`);
+    login(user){
+        return axios.post("http://localhost:8080/api/employers/login",user)
     }
 
 }
