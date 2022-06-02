@@ -3,21 +3,23 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
-import MessageModal from "./../layouts/MessageModal";
+import MessageModal from "../layouts/MessageModal";
 import { Container, Grid, Form, Label, Button } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
+import ErrorMessageModal from "../layouts/ErrorMessageModal";
 import { toast } from "react-toastify";
 export default function CandidateSıgnIn() {
 
-    
+
     let candidateService = new CandidateService()
 
+    const [success,setSuccess]=useState(false)
+    const [message, setMessage] = useState("")
     const [open, setOpen] = useState(false);
-
 
     const initialValues = {
         email: "",
-        password:"",
+        password: "",
     };
 
     const validationSchema = Yup.object({
@@ -25,10 +27,10 @@ export default function CandidateSıgnIn() {
         password: Yup.string().required("Boş Bırakılamaz"),
     });
 
-    function handleCandidateValues(values){
+    function handleCandidateValues(values) {
         return {
             email: values.email,
-            password : values.password,
+            password: values.password,
         }
     }
 
@@ -38,14 +40,12 @@ export default function CandidateSıgnIn() {
         setTimeout(() => {
             resetForm();
         }, 100);
-
-        candidateService.login(handleCandidateValues(values)).then(result=>{
-            if (result.data.success) {
-                toast.success(result.data.message)
-            } else {
-                toast.error(result.data.message)
-            }
+        
+        candidateService.login(handleCandidateValues(values)).then(result =>{
+            setMessage(result.data.message)
+            setSuccess(result.data.success)
         })
+        
     };
 
     const formik = useFormik({
@@ -99,9 +99,11 @@ export default function CandidateSıgnIn() {
                         <Grid.Column width="3" />
                     </Grid.Row>
                 </Grid>
+                {success ? <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content={message} /> :<ErrorMessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content={message}   />
 
-                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi !" />
+                }
+                
             </Container>
         </div>
     );
-}
+    }
