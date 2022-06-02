@@ -1,20 +1,15 @@
-import React,{useState} from 'react'
-import { NavLink } from "react-router-dom";
-import { Menu, Container, Header } from "semantic-ui-react";    
-import LogIn from './LogIn';
-import LogOut from './LogOut';
+import React from 'react'
+import { NavLink,Link } from "react-router-dom";
+import { Menu, Container, Header,Button,Icon } from "semantic-ui-react";    
+import SignedIn from '../layouts/SignedIn';
+import SignedOut from "../layouts/SignedOut";
+import {useSelector} from "react-redux";
 
 export default function Navi() {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const {authItem} =useSelector(state => state.auth)
 
-    function handleSignOut(){
-        setIsAuthenticated(false)
-    }
-    function handleSignIn(){
-        setIsAuthenticated(true)
-    }
-
+    
     return (
         
         <Menu borderless fixed="top">
@@ -26,12 +21,17 @@ export default function Navi() {
                 <Menu.Item as={NavLink} to="/jobPostings" icon="list alternate outline" content="İŞ İLANLARI" />
                 <Menu.Item as={NavLink} to="/candidates" icon="user outline" content="İŞ ADAYLARI" />
                 <Menu.Item as={NavLink} to="/employers" icon="building outline" content="İŞ VERENLER" />
-                <Menu.Menu position="right"  >
-                    <Menu.Item position="right" fitted>
-                        {isAuthenticated?<LogIn signOut={handleSignOut}/>:<LogOut signIn={handleSignIn}/> }
-                    </Menu.Item>
-                    
-                </Menu.Menu>
+                <Menu.Menu position="right" style={{ margin: '0.5em' }}>
+                        {authItem[0].loggedIn && authItem[0].user.userType === 2 && <Button primary style={{ lineHeight: "20px", borderRadius: '25px' }} as={Link} to={"/jobAdCreate"}>
+                            <span>YENİ İLAN + </span>
+                        </Button>}
+                        {authItem[0].loggedIn && authItem[0].user.userType === 1 && <Button color="red" as={Link} to={`/jobAdFavorites`} style={{ lineHeight: "20px", borderRadius: '25px' }}>
+                            <Icon name='heart' />
+                            Favori İlanlar
+                        </Button>}
+
+                        {authItem[0].loggedIn ? <SignedIn/>: <SignedOut/>}
+                    </Menu.Menu>
             </Container>
         </Menu>
     )

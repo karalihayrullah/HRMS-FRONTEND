@@ -55,7 +55,7 @@ export default function CoverLetterEdit() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Bilgilendire Duzenleme" />
+        <Headline content="Bilgilendirme Duzenleme" />
 
         <Grid>
           <Grid.Row>

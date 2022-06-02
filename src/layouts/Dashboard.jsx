@@ -10,8 +10,7 @@ import EmployerLayout from './EmployerLayout'
 import EmployerDetail from '../pages/EmployerDetail'
 import CandidateAdd from "./../pages/CandidateAdd";
 import EmployerAdd from "./../pages/EmployerAdd";
-import CandidateSıgnIn from '../pages/CandidateSıgnIn'
-import EmployerSıgnIn from "./../pages/EmployerSıgnIn"
+import Login from '../pages/Login'
 import CandidateLayout from './CandidateLayout'
 import CandidateDetail from '../pages/CandidateDetail'
 import ResumeDetailsEdit from "./../pages/ResumeDetailsEdit";
@@ -56,8 +55,7 @@ export default function Dashboard() {
             <Route exact path="/candidates/resume/:id/skill/add" component={SkillAdd} />
             <Route exact path="/candidates/resume/:id/skill/delete" component={SkillDelete} />
             <Route exact path="/candidate/add" component={CandidateAdd} />
-            <Route exact path="/candidate/signIn" component={CandidateSıgnIn} />
-            <Route exact path="/employer/signIn" component={EmployerSıgnIn} />
+            <Route exact path="/candidate/signIn" component={Login} />
             <Footer />
 
         </Container>

@@ -68,7 +68,7 @@ export default function LinkAdd() {
   return (
     <div>
       <Container className="content">
-        <Headline content="Add Link" />
+        <Headline content="Link Ekle" />
 
         <Grid>
           <Grid.Row>
@@ -95,7 +95,7 @@ export default function LinkAdd() {
                   {formik.errors.url && formik.touched.url && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.url} /><br /></span>}
                   <br />
                   
-                  <Button circular fluid type="submit" color="yellow" content={"Add"} />
+                  <Button circular fluid type="submit" color="yellow" content={"Ekle"} />
                 </Form>
               </Formik>
             </Grid.Column>
@@ -103,7 +103,7 @@ export default function LinkAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Added !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Eklendi!" />
       </Container>
     </div>
   );

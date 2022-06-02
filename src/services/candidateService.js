@@ -18,9 +18,7 @@ export default class candidateService {
         return axios.get("http://localhost:8080/api/candidates/getAll")
     }
 
-    login(user){
-        return axios.post("http://localhost:8080/api/candidates/login",user)
-    }
+    
 
     
 

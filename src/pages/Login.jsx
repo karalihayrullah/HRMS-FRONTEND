@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "../layouts/Headline";
-import DateLabel from "./../layouts/DateLabel";
-import MessageModal from "./../layouts/MessageModal";
-import EmployerService from "../services/employerService";
+import DateLabel from "../layouts/DateLabel";
+import MessageModal from "../layouts/MessageModal";
 import { Container, Grid, Form, Label, Button } from "semantic-ui-react";
+import ErrorMessageModal from "../layouts/ErrorMessageModal";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { userLogin } from "../redux/actions/authActions";
+import UserService from "../services/userService";
+import { toast } from "react-toastify";
 
-export default function EmployerSıgnIn() {
-    const [open, setOpen] = useState(false);
+export default function Login() {
 
-    let employerService = new EmployerService()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    function handleEmployerValues(values) {
-        return {
-            email: values.email,
-            password: values.password,
-        }
+    let userService = new UserService()
+
+    const handleLogin = (user) => {
+        dispatch(userLogin(user))
     }
 
     const initialValues = {
@@ -26,17 +30,28 @@ export default function EmployerSıgnIn() {
 
     const validationSchema = Yup.object({
         email: Yup.string().email().required("Boş Bırakılamaz"),
-        password: Yup.string().required("Boş Bırakılamaz")
+        password: Yup.string().required("Boş Bırakılamaz"),
     });
+
+
 
     const onSubmit = (values, { resetForm }) => {
         console.log(values);
-        handleModal(true);
+        
         setTimeout(() => {
             resetForm();
         }, 100);
 
-        employerService.login(handleEmployerValues(values))
+        userService.login(values).then(result => {
+            handleLogin(result.data.data)
+                
+            history.push("/")
+
+
+        }).catch((result) => {
+            toast.error(result.response.data.message)
+        })
+
     };
 
     const formik = useFormik({
@@ -45,9 +60,7 @@ export default function EmployerSıgnIn() {
         onSubmit: onSubmit,
     });
 
-    const handleModal = (value) => {
-        setOpen(value);
-    };
+  
 
     const handleChange = (fieldName, value) => {
         formik.setFieldValue(fieldName, value);
@@ -73,7 +86,7 @@ export default function EmployerSıgnIn() {
                                         value={formik.values.email}
                                     />
                                     {formik.errors.email && formik.touched.email && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.email} /><br /></span>}
-                                    <br />
+
                                     <Form.Input
                                         name="password"
                                         label="Şifre"
@@ -91,7 +104,6 @@ export default function EmployerSıgnIn() {
                     </Grid.Row>
                 </Grid>
 
-                <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Giriş Başarılı !" />
             </Container>
         </div>
     );
