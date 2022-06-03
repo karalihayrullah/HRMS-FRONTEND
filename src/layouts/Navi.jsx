@@ -22,12 +22,12 @@ export default function Navi() {
                 <Menu.Item as={NavLink} to="/candidates" icon="user outline" content="İŞ ADAYLARI" />
                 <Menu.Item as={NavLink} to="/employers" icon="building outline" content="İŞ VERENLER" />
                 <Menu.Menu position="right" style={{ margin: '0.5em' }}>
-                        {authItem[0].loggedIn && authItem[0].user.userType === 2 && <Button primary style={{ lineHeight: "20px", borderRadius: '25px' }} as={Link} to={"/jobAdCreate"}>
-                            <span>YENİ İLAN + </span>
+                        {authItem[0].loggedIn && authItem[0].user.userType === 2 && <Button primary style={{ lineHeight: "20px", borderRadius: '25px' }} as={Link} to={`/employers/employer/${authItem[0].user?.id}/jobPosting/add`}>
+                            <span>YENİ İLAN EKLE </span>
                         </Button>}
-                        {authItem[0].loggedIn && authItem[0].user.userType === 1 && <Button color="red" as={Link} to={`/jobAdFavorites`} style={{ lineHeight: "20px", borderRadius: '25px' }}>
-                            <Icon name='heart' />
-                            Favori İlanlar
+                        {authItem[0].loggedIn && authItem[0].user.userType === 1 && <Button color="violet" as={Link} to={`/candidates/candidate/${authItem[0].user.id}`} style={{ lineHeight: "20px", borderRadius: '25px' }}>
+                            <Icon name='file' />
+                            Özgeçmiş
                         </Button>}
 
                         {authItem[0].loggedIn ? <SignedIn/>: <SignedOut/>}

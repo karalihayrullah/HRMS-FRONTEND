@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import Headline from "../layouts/Headline";
 import DateLabel from "../layouts/DateLabel";
 import ResumeService from "../services/resumeService";
@@ -10,6 +10,7 @@ import { Container, Grid, Segment, Button, Header } from "semantic-ui-react";
 export default function SkillDelete() {
   let { id } = useParams();
 
+  const history = useHistory()
   const [resumes, setResumes] = useState([]);
   const [resume, setResume] = useState({});
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function SkillDelete() {
     skillService.delete(skillId);
     resumeService.update({id: id});
     handleModal(true);
+    history.push(`/candidates/resume/${id}/skill/delete`)
   };
 
   return (

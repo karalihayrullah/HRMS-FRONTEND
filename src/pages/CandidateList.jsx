@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import ResumeService from "./../services/resumeService";
-import GithubButton from "./../layouts/GithubButton";
-import LinkedinButton from "./../layouts/LinkedinButton";
+import ResumeService from "../services/resumeService";
+import GithubButton from "../layouts/GithubButton";
+import LinkedinButton from "../layouts/LinkedinButton";
 import { Card, Divider, Image} from "semantic-ui-react";
 
-export default function CandidateList() {
+export default function ResumeList() {
   const [resumes, setResumes] = useState([]);
 
   let resumeService = new ResumeService();

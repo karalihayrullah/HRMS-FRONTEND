@@ -27,6 +27,9 @@ import ExperienceDelete from "./../pages/ExperienceDelete";
 import LanguageLevelDelete from "./../pages/LanguageLevelDelete";
 import SkillDelete from "./../pages/SkillDelete";
 import CandidateUpdate from '../pages/CandidateUpdate'
+import EmployerUpdate from '../pages/EmployerUpdate'
+import JobPostingAdd from '../pages/JobPostingAdd'
+
 export default function Dashboard() {
     return (
         <Container className="dashboard">
@@ -38,9 +41,10 @@ export default function Dashboard() {
             <Route exact path="/employers" component={EmployerLayout} />
             <Route exact path="/employers/:type/:id/" component={EmployerDetail} />
             <Route exact path="/employer/add" component={EmployerAdd} />
+            <Route exact path="/employers/employer/profile/update" component={EmployerUpdate} />
             <Route exact path="/candidates" component={CandidateLayout} />
             <Route exact path="/candidates/candidate/:id" component={CandidateDetail} />
-            <Route exact path="/candidates/candidate/:id/update" component={CandidateUpdate} />
+            <Route exact path="/candidates/candidate/profile/update" component={CandidateUpdate} />
             <Route exact path="/candidates/resume/:id/edit" component={ResumeDetailsEdit} />
             <Route exact path="/candidates/resume/:id/link/add" component={LinkAdd} />
             <Route exact path="/candidates/resume/:id/link/delete" component={LinkDelete} />
@@ -56,6 +60,7 @@ export default function Dashboard() {
             <Route exact path="/candidates/resume/:id/skill/delete" component={SkillDelete} />
             <Route exact path="/candidate/add" component={CandidateAdd} />
             <Route exact path="/candidate/signIn" component={Login} />
+            <Route exact path="/employers/employer/:id/jobPosting/add" component={JobPostingAdd} />
             <Footer />
 
         </Container>

@@ -3,14 +3,12 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "../layouts/Headline";
 import DateLabel from "../layouts/DateLabel";
-import MessageModal from "../layouts/MessageModal";
 import { Container, Grid, Form, Label, Button } from "semantic-ui-react";
-import ErrorMessageModal from "../layouts/ErrorMessageModal";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userLogin } from "../redux/actions/authActions";
 import UserService from "../services/userService";
-import { toast } from "react-toastify";
+import alertify from "alertifyjs"
 
 export default function Login() {
 
@@ -29,7 +27,7 @@ export default function Login() {
     };
 
     const validationSchema = Yup.object({
-        email: Yup.string().email().required("Boş Bırakılamaz"),
+        email: Yup.string().email("Email Kurallarına Uymuyor").required("Boş Bırakılamaz"),
         password: Yup.string().required("Boş Bırakılamaz"),
     });
 
@@ -37,19 +35,16 @@ export default function Login() {
 
     const onSubmit = (values, { resetForm }) => {
         console.log(values);
-        
+
         setTimeout(() => {
             resetForm();
         }, 100);
 
         userService.login(values).then(result => {
             handleLogin(result.data.data)
-                
             history.push("/")
-
-
         }).catch((result) => {
-            toast.error(result.response.data.message)
+            alertify.error(result.response.data.message)
         })
 
     };
@@ -60,7 +55,7 @@ export default function Login() {
         onSubmit: onSubmit,
     });
 
-  
+
 
     const handleChange = (fieldName, value) => {
         formik.setFieldValue(fieldName, value);

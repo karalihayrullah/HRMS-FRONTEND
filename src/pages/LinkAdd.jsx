@@ -37,8 +37,8 @@ export default function LinkAdd() {
   };
 
   const validationSchema = Yup.object({
-    linkName: Yup.object().required("Required Field"),
-    url: Yup.string().required("Required Field"),
+    linkName: Yup.object().required("Boş Bırakılamaz"),
+    url: Yup.string().required("Boş Bırakılamaz"),
   });
 
   const onSubmit = (values, { resetForm }) => {
@@ -80,7 +80,7 @@ export default function LinkAdd() {
                 <Form onSubmit={formik.handleSubmit}>
                   <Form.Select
                     name="linkName"
-                    label="Link Name"                     
+                    label="Link"                     
                     options={linkNameOptions}
                     onChange={(event, data) => handleChange("linkName", data.value)}
                     value={formik.values.linkName}

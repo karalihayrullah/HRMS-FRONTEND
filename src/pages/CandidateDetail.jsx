@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 import Headline from "./../layouts/Headline";
 import ResumeService from "./../services/resumeService";
 import GithubButton from "./../layouts/GithubButton";
 import LinkedinButton from "./../layouts/LinkedinButton";
 import DateLabel from "./../layouts/DateLabel";
-import { Container, Grid, Header, Image, Segment, Divider, Icon} from "semantic-ui-react";
+import { Container, Grid, Header, Image, Segment, Divider, Icon,Button} from "semantic-ui-react";
 import LanguageLevelIcons from "./../layouts/LanguageLevelIcons";
+import { useSelector } from "react-redux";
 
 export default function CandidateDetail() {
   let { id } = useParams();
+
+  const {authItem}=useSelector(state=>state.auth)
 
   const [resumes, setResumes] = useState([]);
 
@@ -28,11 +32,14 @@ export default function CandidateDetail() {
           <Grid.Row>
             <Grid.Column width="3" />
             <Grid.Column width="10">
+            
               {resumes.map((resume) => (
                 <Grid key={resume.id}>
                   {resume.candidate?.id == id && (
                     <Grid.Row>
                       <Grid.Column>
+                        {authItem[0].loggedIn && authItem[0].user.userType === 1 &&<Button circular compact floated="right" color="yellow" icon="pencil alternate" as={NavLink} to={`/candidates/resume/${resume.id}/edit`} />}
+                      
                         {resume.image == null
                           ? <Image circular size="small" src="https://res.cloudinary.com/merveucer/image/upload/v1631964376/user_ckfrbd.svg" />
                           : <Image circular size="small" src={resume.image?.url} />}

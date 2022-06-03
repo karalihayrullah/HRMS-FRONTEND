@@ -11,6 +11,7 @@ import { Container, Grid, Form, Label, Button  } from "semantic-ui-react";
 export default function CoverLetterAdd() {
   let { id } = useParams();
   
+  
   const [open, setOpen] = useState(false);
 
   let coverLetterService = new CoverLetterService();
@@ -65,7 +66,7 @@ export default function CoverLetterAdd() {
                   <Form.Input
                     name="name"
                     label="İsim"
-                    onChange={(event, data) => handleChange("isim", data.value)}
+                    onChange={(event, data) => handleChange("name", data.value)}
                     value={formik.values.name}
                   />
                   {formik.errors.name && formik.touched.name && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.name} /><br /><br /></span>}
@@ -73,7 +74,7 @@ export default function CoverLetterAdd() {
                     name="content"
                     label="İçerik"
                     placeholder=". . ."
-                    onChange={(event, data) => handleChange("içerik", data.value)}
+                    onChange={(event, data) => handleChange("content", data.value)}
                     value={formik.values.content}
                   />
                   {formik.errors.content && formik.touched.content && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.content} /><br /></span>}

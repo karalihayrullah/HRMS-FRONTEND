@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import JobPostingService from "../services/JobPostingService";
+import JobPostingService from "../services/jobPostingService";
 import CityService from "../services/cityService";
 import JobTitleService from "../services/jobTitleService";
 import WorkingTimeService from "../services/workingTimeService";

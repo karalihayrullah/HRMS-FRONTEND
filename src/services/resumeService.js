@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default class ResumeService {
 
+    add(values){
+        return axios.put("http://localhost:8080/api/resumes/add", values);
+    }
+
     update(values) {
         return axios.put("http://localhost:8080/api/resumes/update", values);
     }

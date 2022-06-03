@@ -3,14 +3,14 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Headline from "./../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
-import MessageModal from "./../layouts/MessageModal";
+
 import { Container, Grid, Label, Form, Button } from "semantic-ui-react";
 import CandidateService from "./../services/candidateService"
 import { useHistory } from "react-router";
-import { toast } from 'react-toastify'
+import alertify from "alertifyjs"
 
 export default function CandidateAdd() {
-  const [open, setOpen] = useState(false);
+ 
 
   let candidateService = new CandidateService();
 
@@ -36,29 +36,19 @@ export default function CandidateAdd() {
     confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], 'Şifre Eşleşmiyor'),
   });
 
-  function handleCandidateValues(values) {
-    return {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      birthYear: values.birthYear,
-      nationalityId: values.nationalityId,
-      email: values.email,
-      password: values.password,
-    }
-  }
+ 
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
-    handleModal(true);
     setTimeout(() => {
       resetForm();
     }, 100);
 
-    candidateService.add(handleCandidateValues(values)).then(result => {
+    candidateService.add(values).then(result => {
       if (result.data.success) {
-        toast.success(result.data.message)
-        history.push("/candidate")
+        alertify.success(result.data.message)
+        history.push("/")
       } else {
-        toast.error(result.data.message)
+        alertify.error(result.data.message)
       }
     })
   };
@@ -71,9 +61,6 @@ export default function CandidateAdd() {
     onSubmit: onSubmit,
   });
 
-  const handleModal = (value) => {
-    setOpen(value);
-  };
 
   const handleChange = (fieldName, value) => {
     formik.setFieldValue(fieldName, value);
@@ -164,7 +151,7 @@ export default function CandidateAdd() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Kayıt Başarılı !" />
+      
       </Container>
     </div>
   );

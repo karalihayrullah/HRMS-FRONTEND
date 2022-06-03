@@ -4,7 +4,7 @@ import Headline from "../layouts/Headline";
 import DateLabel from "./../layouts/DateLabel";
 import MessageModal from "./../layouts/MessageModal";
 import { Container, Header, Grid, Divider, Icon, Label} from "semantic-ui-react";
-import JobPostingService from "../services/JobPostingService";
+import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingDetail() {
   let { id } = useParams();

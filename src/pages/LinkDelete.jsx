@@ -77,7 +77,7 @@ export default function LinkDelete() {
           </Grid.Row>
         </Grid>
 
-        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Deleted !" />
+        <MessageModal onClose={() => handleModal(false)} onOpen={() => handleModal(true)} open={open} content="Silindi !" />
       </Container>
     </div>
   );
