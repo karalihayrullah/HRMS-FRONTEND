@@ -80,7 +80,7 @@ export default function CoverLetterAdd() {
                   {formik.errors.content && formik.touched.content && <span><Label basic pointing color="pink" className="orbitron" content={formik.errors.content} /><br /></span>}
                   <br />
 
-                  <Button circular fluid type="submit" color="yellow" content="Eklee" />
+                  <Button circular fluid type="submit" color="yellow" content="Ekle" />
                 </Form>
               </Formik>
             </Grid.Column>

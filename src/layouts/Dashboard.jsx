@@ -29,6 +29,7 @@ import SkillDelete from "./../pages/SkillDelete";
 import CandidateUpdate from '../pages/CandidateUpdate'
 import EmployerUpdate from '../pages/EmployerUpdate'
 import JobPostingAdd from '../pages/JobPostingAdd'
+import ImageUpdate from '../pages/ImageUpdate'
 
 export default function Dashboard() {
     return (
@@ -61,6 +62,8 @@ export default function Dashboard() {
             <Route exact path="/candidate/add" component={CandidateAdd} />
             <Route exact path="/candidate/signIn" component={Login} />
             <Route exact path="/employers/employer/:id/jobPosting/add" component={JobPostingAdd} />
+            <Route exact path="/candidates/resume/:id/Image/update" component={ImageUpdate} />
+
             <Footer />
 
         </Container>

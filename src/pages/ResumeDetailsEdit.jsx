@@ -9,11 +9,11 @@ export default function ResumeDetailsEdit() {
   let { id } = useParams();
 
   const [resume, setResume] = useState({});
-
+  
   let resumeService = new ResumeService();
 
   useEffect(() => {
-    resumeService.getById(id).then((result) => setResume(result.data.data));
+    resumeService.getByCandidateId(id).then((result) => setResume(result.data.data));
   }, []);
 
   return (
@@ -25,6 +25,13 @@ export default function ResumeDetailsEdit() {
           <Grid.Row>
             <Grid.Column width="5" />
             <Grid.Column width="6">
+            <ButtonsOfEdit 
+                content="Profil Resmi"
+                firstIcon="add"
+                secondIcon="trash"
+                firstTo={`/candidates/resume/${id}/Image/update`}
+                secondTo={`/candidates/resume/:id/Image/update`}
+              />
               <ButtonsOfEdit 
                 content="Link"
                 firstIcon="add"
@@ -36,8 +43,8 @@ export default function ResumeDetailsEdit() {
                 content="Bilgilendirme"
                 firstIcon="add"
                 secondIcon="pencil alternate"
-                firstTo={`/candidates/candidate/${resume.candidate?.id}/coverLetter/add`}
-                secondTo={`/candidates/candidate/${resume.candidate?.id}/coverLetter/edit`}
+                firstTo={`/candidates/candidate/${id}/coverLetter/add`}
+                secondTo={`/candidates/candidate/${id}/coverLetter/edit`}
               />
               <ButtonsOfEdit
                 content="Eğitimler"

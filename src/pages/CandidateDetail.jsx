@@ -38,7 +38,7 @@ export default function CandidateDetail() {
                   {resume.candidate?.id == id && (
                     <Grid.Row>
                       <Grid.Column>
-                        {authItem[0].loggedIn && authItem[0].user.userType === 1 &&<Button circular compact floated="right" color="yellow" icon="pencil alternate" as={NavLink} to={`/candidates/resume/${resume.id}/edit`} />}
+                        {authItem[0].loggedIn && authItem[0].user.userType === 1 &&<Button circular compact floated="right" color="yellow" icon="pencil alternate" as={NavLink} to={`/candidates/resume/${id}/edit`} />}
                       
                         {resume.image == null
                           ? <Image circular size="small" src="https://res.cloudinary.com/merveucer/image/upload/v1631964376/user_ckfrbd.svg" />
