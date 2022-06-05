@@ -21,7 +21,7 @@ export default function ResumeList() {
           <Card.Content textAlign="center" as={NavLink} to={`/candidates/candidate/${resume.candidate?.id}`}>        
             <br />
             {resume.image == null
-              ? <Image circular size="small" src="https://res.cloudinary.com/merveucer/image/upload/v1631964376/user_ckfrbd.svg" />
+              ? <Image circular size="small" src="https://res.cloudinary.com/hrmsphotos/image/upload/v1654330381/Users/user_ckfrbd_1_kj35nb.svg" />
               : <Image circular size="small" src={resume.image?.url} />}            
             <br /><br />
             <Card.Header className="montserrat">
